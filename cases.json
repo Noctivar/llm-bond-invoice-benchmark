@@ -1,0 +1,122 @@
+[
+  {
+    "id": "basic_99_16",
+    "description": "baseline clean+accrued; catches yield-pricing confusion",
+    "face_value": 100000,
+    "annual_coupon_rate": 0.05,
+    "quote": "99-16",
+    "days_since_coupon": 90,
+    "days_in_coupon_period": 181,
+    "expected_invoice_amount": 100743.09
+  },
+  {
+    "id": "plus_tick_99_16p",
+    "description": "trailing '+' = half a 32nd; catches dropped plus",
+    "face_value": 100000,
+    "annual_coupon_rate": 0.05,
+    "quote": "99-16+",
+    "days_since_coupon": 90,
+    "days_in_coupon_period": 181,
+    "expected_invoice_amount": 100758.72
+  },
+  {
+    "id": "decimal_trap_101_03",
+    "description": "101-03 != 101.03; catches naive decimal parse",
+    "face_value": 100000,
+    "annual_coupon_rate": 0.04,
+    "quote": "101-03",
+    "days_since_coupon": 60,
+    "days_in_coupon_period": 184,
+    "expected_invoice_amount": 101745.92
+  },
+  {
+    "id": "par_100_00",
+    "description": "par price; isolates accrued interest",
+    "face_value": 100000,
+    "annual_coupon_rate": 0.06,
+    "quote": "100-00",
+    "days_since_coupon": 30,
+    "days_in_coupon_period": 182,
+    "expected_invoice_amount": 100494.51
+  },
+  {
+    "id": "zero_accrued",
+    "description": "days_since=0 => invoice == clean value",
+    "face_value": 100000,
+    "annual_coupon_rate": 0.05,
+    "quote": "99-16",
+    "days_since_coupon": 0,
+    "days_in_coupon_period": 181,
+    "expected_invoice_amount": 99500.0
+  },
+  {
+    "id": "full_period_accrued",
+    "description": "full half-coupon accrued just before payment",
+    "face_value": 100000,
+    "annual_coupon_rate": 0.05,
+    "quote": "99-16",
+    "days_since_coupon": 181,
+    "days_in_coupon_period": 181,
+    "expected_invoice_amount": 102000.0
+  },
+  {
+    "id": "high_coupon_10",
+    "description": "high coupon amplifies annual-vs-semiannual error",
+    "face_value": 100000,
+    "annual_coupon_rate": 0.1,
+    "quote": "98-24",
+    "days_since_coupon": 120,
+    "days_in_coupon_period": 184,
+    "expected_invoice_amount": 102010.87
+  },
+  {
+    "id": "big_face_1mm",
+    "description": "1MM face; scales rounding error",
+    "face_value": 1000000,
+    "annual_coupon_rate": 0.0375,
+    "quote": "105-08",
+    "days_since_coupon": 45,
+    "days_in_coupon_period": 183,
+    "expected_invoice_amount": 1057110.66
+  },
+  {
+    "id": "small_face_1k",
+    "description": "tiny face; rounding to the cent matters",
+    "face_value": 1000,
+    "annual_coupon_rate": 0.025,
+    "quote": "97-12+",
+    "days_since_coupon": 73,
+    "days_in_coupon_period": 181,
+    "expected_invoice_amount": 978.95
+  },
+  {
+    "id": "near_boundary_98_31p",
+    "description": "31+ ticks near the 32-tick rollover",
+    "face_value": 100000,
+    "annual_coupon_rate": 0.045,
+    "quote": "98-31+",
+    "days_since_coupon": 91,
+    "days_in_coupon_period": 182,
+    "expected_invoice_amount": 100109.38
+  },
+  {
+    "id": "low_tick_100_01",
+    "description": "single low tick; 100-01 != 100.01",
+    "face_value": 250000,
+    "annual_coupon_rate": 0.035,
+    "quote": "100-01",
+    "days_since_coupon": 10,
+    "days_in_coupon_period": 184,
+    "expected_invoice_amount": 250315.9
+  },
+  {
+    "id": "eighths_99_162",
+    "description": "eighths sub-tick form 99-16 2/8",
+    "face_value": 100000,
+    "annual_coupon_rate": 0.05,
+    "quote": "99-162",
+    "days_since_coupon": 90,
+    "days_in_coupon_period": 181,
+    "expected_invoice_amount": 100750.91
+  }
+]

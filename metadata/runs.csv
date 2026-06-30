@@ -1,0 +1,4 @@
+run_id,prompt_type,prompt_number,model,request_id,response_id,date,attempt_path,tests_passed,tests_total,notes
+# Example template rows (commented). Replace with real runs; do not commit the leading '#'.
+# baseline_01,baseline,1,claude-opus-4-8,req_xxx,resp_xxx,2026-06-30,attempts/baseline_01/attempt.py,0,12,parsed 99-16 as 99.16; no accrued interest
+# improved_01,improved,1,claude-opus-4-8,req_yyy,resp_yyy,2026-06-30,attempts/improved_01/attempt.py,12,12,all cases pass

@@ -1,0 +1,3 @@
+# The oracle and evaluator use only the Python standard library.
+# pytest is required only to run the test suite in tests/.
+pytest>=7.0
