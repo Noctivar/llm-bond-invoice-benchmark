@@ -1,4 +1,6 @@
 run_id,prompt_type,prompt_number,model,request_id,response_id,date,attempt_path,tests_passed,tests_total,notes
-# Example template rows (commented). Replace with real runs; do not commit the leading '#'.
-# baseline_01,baseline,1,claude-opus-4-8,req_xxx,resp_xxx,2026-06-30,attempts/baseline_01/attempt.py,0,12,parsed 99-16 as 99.16; no accrued interest
-# improved_01,improved,1,claude-opus-4-8,req_yyy,resp_yyy,2026-06-30,attempts/improved_01/attempt.py,12,12,all cases pass
+baseline_01,baseline,1,Claude Code,not_captured,not_captured,2026-06-30,attempts/baseline_01/solution.py,11,16,"Failed extended eighths-of-a-32nd Treasury quote cases"
+baseline_02,baseline,2,Claude Code,not_captured,not_captured,2026-06-30,attempts/baseline_02/solution.py,11,16,"Failed extended eighths-of-a-32nd Treasury quote cases"
+baseline_03,baseline,3,Claude Code,not_captured,not_captured,2026-06-30,attempts/baseline_03/solution.py,11,16,"Failed extended eighths-of-a-32nd Treasury quote cases"
+baseline_04,baseline,4,Claude Code,not_captured,not_captured,2026-06-30,attempts/baseline_04/solution.py,11,16,"Raised ValueError on extended eighths-of-a-32nd Treasury quote cases"
+baseline_05,baseline,5,Claude Code,not_captured,not_captured,2026-06-30,attempts/baseline_05/solution.py,0,16,"Vague quote-string prompt failed all Treasury quote-format cases"

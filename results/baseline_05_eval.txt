@@ -1,0 +1,25 @@
+Evaluating: attempts/baseline_05/solution.py
+Cases:      cases.json  (16 cases)
+Tolerance:  0.01 (one cent)
+
+ #  case                     quote         expected          actual  result
+------------------------------------------------------------------------------
+ 1  basic_99_16              99-16       100,743.09 ERROR: ValueError  FAIL
+ 2  plus_tick_99_16p         99-16+      100,758.72 ERROR: ValueError  FAIL
+ 3  decimal_trap_101_03      101-03      101,745.92 ERROR: ValueError  FAIL
+ 4  par_100_00               100-00      100,494.51 ERROR: ValueError  FAIL
+ 5  zero_accrued             99-16        99,500.00 ERROR: ValueError  FAIL
+ 6  full_period_accrued      99-16       102,000.00 ERROR: ValueError  FAIL
+ 7  high_coupon_10           98-24       102,010.87 ERROR: ValueError  FAIL
+ 8  big_face_1mm             105-08    1,057,110.66 ERROR: ValueError  FAIL
+ 9  small_face_1k            97-12+          978.95 ERROR: ValueError  FAIL
+10  near_boundary_98_31p     98-31+      100,109.38 ERROR: ValueError  FAIL
+11  low_tick_100_01          100-01      250,315.90 ERROR: ValueError  FAIL
+12  eighths_99_162           99-162      100,750.91 ERROR: ValueError  FAIL
+13  eighths_99_161           99-161      100,747.00 ERROR: ValueError  FAIL
+14  eighths_99_163           99-163      100,754.81 ERROR: ValueError  FAIL
+15  eighths_98_317           98-317      100,121.09 ERROR: ValueError  FAIL
+16  eighths_101_035          101-035     253,020.97 ERROR: ValueError  FAIL
+------------------------------------------------------------------------------
+
+SCORE: 0/16 passed (0.0%)
