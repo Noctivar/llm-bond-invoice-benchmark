@@ -39,3 +39,49 @@ _paste evaluator output / observations here_
 ### improved_04
 
 ### improved_05
+
+## Improved Results Summary
+
+All improved prompts passed the full deterministic evaluator.
+
+| Run | Score | Result |
+|---|---:|---|
+| Improved 1 | 16/16 | PASS |
+| Improved 2 | 16/16 | PASS |
+| Improved 3 | 16/16 | PASS |
+| Improved 4 | 16/16 | PASS |
+| Improved 5 | 16/16 | PASS |
+
+The improved prompts explicitly specified:
+- Treasury quote parsing in 32nds
+- plus-tick notation
+- eighths-of-a-32nd notation
+- clean price vs invoice/dirty amount
+- semiannual coupon accrual
+- final cent rounding without intermediate rounding
+
+Conclusion:
+Guided prompts corrected the failure modes observed in the baseline attempts.
+
+## Improved Results Summary
+
+All improved prompts passed the full deterministic evaluator.
+
+| Run | Score | Result |
+|---|---:|---|
+| Improved 1 | 16/16 | PASS |
+| Improved 2 | 16/16 | PASS |
+| Improved 3 | 16/16 | PASS |
+| Improved 4 | 16/16 | PASS |
+| Improved 5 | 16/16 | PASS |
+
+The improved prompts explicitly specified:
+- Treasury quote parsing in 32nds
+- plus-tick notation
+- eighths-of-a-32nd notation
+- clean price vs invoice/dirty amount
+- semiannual coupon accrual
+- final cent rounding without intermediate rounding
+
+Conclusion:
+Guided prompts corrected the failure modes observed in the baseline attempts.

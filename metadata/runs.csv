@@ -4,3 +4,8 @@ baseline_02,baseline,2,Claude Code,not_captured,not_captured,2026-06-30,attempts
 baseline_03,baseline,3,Claude Code,not_captured,not_captured,2026-06-30,attempts/baseline_03/solution.py,11,16,"Failed extended eighths-of-a-32nd Treasury quote cases"
 baseline_04,baseline,4,Claude Code,not_captured,not_captured,2026-06-30,attempts/baseline_04/solution.py,11,16,"Raised ValueError on extended eighths-of-a-32nd Treasury quote cases"
 baseline_05,baseline,5,Claude Code,not_captured,not_captured,2026-06-30,attempts/baseline_05/solution.py,0,16,"Vague quote-string prompt failed all Treasury quote-format cases"
+improved_01,improved,1,Claude Code,not_captured,not_captured,2026-06-30,attempts/improved_01/solution.py,16,16,"Explicitly specified 32nds, plus ticks, eighths, clean value, accrued interest, and rounding"
+improved_02,improved,2,Claude Code,not_captured,not_captured,2026-06-30,attempts/improved_02/solution.py,16,16,"Explicit parsing rules for whole points, 32nds, plus sign, and eighths"
+improved_03,improved,3,Claude Code,not_captured,not_captured,2026-06-30,attempts/improved_03/solution.py,16,16,"Specified clean quote, semiannual accrual, and no yield pricing"
+improved_04,improved,4,Claude Code,not_captured,not_captured,2026-06-30,attempts/improved_04/solution.py,16,16,"Specified clean-to-dirty invoice calculation and fractional 32nd notation"
+improved_05,improved,5,Claude Code,not_captured,not_captured,2026-06-30,attempts/improved_05/solution.py,16,16,"Specified all benchmark quote formats and exact invoice formula"
