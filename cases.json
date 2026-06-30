@@ -118,5 +118,45 @@
     "days_since_coupon": 90,
     "days_in_coupon_period": 181,
     "expected_invoice_amount": 100750.91
+  },
+  {
+    "id": "eighths_99_161",
+    "description": "eighths sub-tick 99-16 1/8; smallest non-zero eighth",
+    "face_value": 100000,
+    "annual_coupon_rate": 0.05,
+    "quote": "99-161",
+    "days_since_coupon": 90,
+    "days_in_coupon_period": 181,
+    "expected_invoice_amount": 100747.0
+  },
+  {
+    "id": "eighths_99_163",
+    "description": "eighths sub-tick 99-16 3/8; brackets the '+' (4/8) case",
+    "face_value": 100000,
+    "annual_coupon_rate": 0.05,
+    "quote": "99-163",
+    "days_since_coupon": 90,
+    "days_in_coupon_period": 181,
+    "expected_invoice_amount": 100754.81
+  },
+  {
+    "id": "eighths_98_317",
+    "description": "eighths near 32-tick rollover 98-31 7/8; catches tick overflow",
+    "face_value": 100000,
+    "annual_coupon_rate": 0.045,
+    "quote": "98-317",
+    "days_since_coupon": 91,
+    "days_in_coupon_period": 182,
+    "expected_invoice_amount": 100121.09
+  },
+  {
+    "id": "eighths_101_035",
+    "description": "low tick + eighths 101-03 5/8; 101-035 != 101.035",
+    "face_value": 250000,
+    "annual_coupon_rate": 0.035,
+    "quote": "101-035",
+    "days_since_coupon": 10,
+    "days_in_coupon_period": 184,
+    "expected_invoice_amount": 253020.97
   }
 ]

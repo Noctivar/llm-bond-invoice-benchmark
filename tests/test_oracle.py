@@ -38,8 +38,18 @@ def test_parse_low_ticks_not_decimal():
 
 def test_parse_eighths_subtick():
     # The third digit encodes eighths of a 32nd; '+' equals a 4 there.
+    assert oracle.parse_quote("99-161") == pytest.approx(99 + (16 + 1 / 8) / 32)
     assert oracle.parse_quote("99-162") == pytest.approx(99 + (16 + 2 / 8) / 32)
+    assert oracle.parse_quote("99-163") == pytest.approx(99 + (16 + 3 / 8) / 32)
     assert oracle.parse_quote("99-164") == pytest.approx(oracle.parse_quote("99-16+"))
+
+
+def test_parse_eighths_at_boundaries():
+    # Guards against: mis-splitting the two 32nds digits from the trailing eighth,
+    # e.g. reading "98-317" as 98-31 + 7/8 (not 98-3 + 17, nor 98-317/...).
+    assert oracle.parse_quote("98-317") == pytest.approx(98 + (31 + 7 / 8) / 32)
+    # Guards against: "101-035" -> 101.035; the leading tick zero must be kept.
+    assert oracle.parse_quote("101-035") == pytest.approx(101 + (3 + 5 / 8) / 32)
 
 
 def test_parse_rejects_garbage():
