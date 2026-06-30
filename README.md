@@ -1,6 +1,6 @@
 # LLM Bond Invoice Benchmark
 
-This project evaluates whether an AI coding agent can correctly implement a small but domain-specific fixed-income calculation. Basically computing the invoice amount for a Treasury bond from a quoted clean price and accrued interest inputs.
+This project evaluates whether an AI coding agent can correctly implement a small but domain-specific fixed-income calculation. It computes the invoice amount for a Treasury bond from a quoted clean price and accrued interest inputs.
 
 The assignment goal is to compare vague baseline prompts against improved prompts. The baseline prompts produce plausible but incorrect finance code. The improved prompts explicitly specify the missing fixed-income conventions and produce correct results.
 
