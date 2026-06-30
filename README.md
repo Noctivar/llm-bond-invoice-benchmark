@@ -1,126 +1,137 @@
-# Treasury Bond Invoice Benchmark
+# LLM Bond Invoice Benchmark
 
-A small, deterministic benchmark that demonstrates how **prompt quality affects
-the correctness of LLM-generated finance code**. The task: compute the *invoice
-amount* (a.k.a. dirty value) of a U.S. Treasury bond trade from a 32nds price
-quote, a coupon rate, and an accrued-interest day count.
+This project evaluates whether an AI coding agent can correctly implement a small but domain-specific fixed-income calculation. Basically computing the invoice amount for a Treasury bond from a quoted clean price and accrued interest inputs.
 
-Vague prompts tend to produce code with predictable, realistic mistakes (parsing
-`99-16` as `99.16`, dropping the `+`, returning the clean value, forgetting
-accrued interest, using the annual coupon, mis-rounding, or pricing from yield).
-Improved prompts that state the finance rules explicitly produce code that passes.
-The grader, test cases, and tolerance are held constant — **only the prompt
-changes** — so the score gap is attributable to prompt quality.
+The assignment goal is to compare vague baseline prompts against improved prompts. The baseline prompts produce plausible but incorrect finance code. The improved prompts explicitly specify the missing fixed-income conventions and produce correct results.
 
-## The finance problem
+## Problem
 
 Given:
 
-- `face_value` — par value of the position (e.g. `100_000`)
-- `annual_coupon_rate` — decimal annual coupon (`0.05` == 5%)
-- `quote` — a Treasury 32nds price string (`"99-16"`, `"99-16+"`, `"101-03"`)
-- `days_since_coupon` — days elapsed in the current coupon period
-- `days_in_coupon_period` — total days in the current coupon period
+* face value
+* annual coupon rate
+* Treasury clean price quote
+* days since last coupon
+* days in coupon period
 
-Compute the invoice amount with these rules:
+compute the buyer's invoice amount.
 
-1. **Quotes are in 32nds of a point.**
-   - `99-16`  = `99 + 16/32`
-   - `99-16+` = `99 + 16.5/32`  (a trailing `+` adds half a 32nd)
-   - `101-03` = `101 + 3/32`
-2. The quote is a **clean price per 100 of face value**.
-3. `clean_value = face_value * clean_price_decimal / 100`
-4. `accrued_interest = face_value * annual_coupon_rate / 2 * days_since_coupon / days_in_coupon_period`
-   (the `/ 2` is because Treasury coupons pay **semiannually**)
-5. `invoice_amount = clean_value + accrued_interest`, rounded to the nearest cent.
+The key finance conventions are:
 
-## Repository layout
+```text
+Treasury quote -> clean price per 100 face value
 
-```
-oracle.py                     Reference correct implementation + quote parser
-cases.json                    12 deterministic test cases (expected values from the oracle)
-evaluate_attempt.py           Scores any attempt file against cases.json
-tests/test_oracle.py          Pytest unit tests for the oracle (24 tests)
-prompts/baseline_prompts.md   Vague prompts (expected to fail)
-prompts/improved_prompts.md   Clear, rule-stating prompts (expected to pass)
-results/baseline_results.md   Scoreboard template for baseline runs
-results/improved_results.md   Scoreboard template for improved runs
-metadata/runs.csv             One row per evaluated attempt (provenance + score)
-attempts/<run_id>/            Where attempt.py files go (not generated yet)
-requirements.txt              pytest (everything else is stdlib)
+clean_value = face_value * clean_price / 100
+
+accrued_interest = face_value * annual_coupon_rate / 2
+                   * days_since_coupon / days_in_coupon_period
+
+invoice_amount = clean_value + accrued_interest
 ```
 
-## The contract an attempt must satisfy
+The quote parsing is the main trap. Treasury quotes are not decimal prices.
 
-Each attempt is a Python file that defines exactly:
+Examples:
 
-```python
-def invoice_amount(face_value, annual_coupon_rate, quote,
-                   days_since_coupon, days_in_coupon_period):
-    ...
+```text
+99-16   = 99 + 16/32
+99-16+  = 99 + 16.5/32
+99-162  = 99 + (16 + 2/8)/32
+98-317  = 98 + (31 + 7/8)/32
+101-035 = 101 + (3 + 5/8)/32
 ```
 
-It must return the invoice amount as a number.
+## Why LLMs fail
 
-## Usage
+Vague prompts often cause realistic finance-code mistakes:
 
-Install the (single) test dependency:
+* treating `99-16` as a decimal-like string
+* handling `99-16+` but failing eighths-of-a-32nd notation
+* returning the clean value instead of the dirty/invoice amount
+* forgetting accrued interest
+* using the annual coupon instead of the semiannual coupon
+* rounding too early
+
+## Results
+
+| Run        | Prompt Type | Score | Main Result                                   |
+| ---------- | ----------: | ----: | --------------------------------------------- |
+| Baseline 1 |       Vague | 11/16 | Failed extended eighths-of-a-32nd quote cases |
+| Baseline 2 |       Vague | 11/16 | Failed extended eighths-of-a-32nd quote cases |
+| Baseline 3 |       Vague | 11/16 | Failed extended eighths-of-a-32nd quote cases |
+| Baseline 4 |       Vague | 11/16 | Raised errors on extended eighths quote cases |
+| Baseline 5 |       Vague |  0/16 | Failed all Treasury quote-format cases        |
+| Improved 1 |      Guided | 16/16 | Passed                                        |
+| Improved 2 |      Guided | 16/16 | Passed                                        |
+| Improved 3 |      Guided | 16/16 | Passed                                        |
+| Improved 4 |      Guided | 16/16 | Passed                                        |
+| Improved 5 |      Guided | 16/16 | Passed                                        |
+
+## Project structure
+
+```text
+.
+├── oracle.py
+├── cases.json
+├── evaluate_attempt.py
+├── attempts/
+│   ├── baseline_01/
+│   ├── baseline_02/
+│   ├── baseline_03/
+│   ├── baseline_04/
+│   ├── baseline_05/
+│   ├── improved_01/
+│   ├── improved_02/
+│   ├── improved_03/
+│   ├── improved_04/
+│   └── improved_05/
+├── prompts/
+│   ├── baseline_prompts.md
+│   └── improved_prompts.md
+├── results/
+│   ├── baseline_results.md
+│   ├── improved_results.md
+│   └── *_eval.txt
+├── metadata/
+│   └── runs.csv
+└── tests/
+    └── test_oracle.py
+```
+
+## Running the benchmark
+
+Install dependencies:
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Run the oracle's own tests:
+Run oracle tests:
 
 ```bash
-pytest -q
+pytest
 ```
 
-Score an attempt against the cases:
+Evaluate one attempt:
 
 ```bash
-python evaluate_attempt.py attempts/baseline_01/attempt.py
+python3 evaluate_attempt.py attempts/baseline_01/solution.py
 ```
 
-The evaluator prints each case (inputs, expected, actual, PASS/FAIL) and an
-overall score. A case passes when the answer is within **one cent** of the
-oracle. Exit code is `0` only when all cases pass.
-
-You can sanity-check the harness by scoring the oracle itself (it satisfies the
-contract and scores 12/12):
+Evaluate all attempts:
 
 ```bash
-python evaluate_attempt.py oracle.py
+for f in attempts/baseline_01/solution.py attempts/baseline_02/solution.py attempts/baseline_03/solution.py attempts/baseline_04/solution.py attempts/baseline_05/solution.py attempts/improved_01/solution.py attempts/improved_02/solution.py attempts/improved_03/solution.py attempts/improved_04/solution.py attempts/improved_05/solution.py
+do
+  echo "===== $f ====="
+  python3 evaluate_attempt.py "$f" | tail -n 3
+done
 ```
 
-## What each case targets
+## Takeaway
 
-`cases.json` is built so that the common natural mistakes each fail at least one
-case:
+The baseline prompts were not malicious or deliberately wrong. They were merely underspecified. The failures came from missing fixed-income conventions that are obvious to a domain expert but easy for a general coding agent to omit.
 
-| Mistake                                              | Caught by (examples)                       |
-|------------------------------------------------------|--------------------------------------------|
-| Parsing `99-16` as `99.16`                           | `basic_99_16`, `decimal_trap_101_03`       |
-| Ignoring the trailing `+`                            | `plus_tick_99_16p`, `near_boundary_98_31p` |
-| Returning clean value instead of dirty/invoice value | every case with `days_since_coupon > 0`    |
-| Forgetting accrued interest                          | `par_100_00`, `full_period_accrued`        |
-| Using annual coupon instead of semiannual            | `high_coupon_10`, `full_period_accrued`    |
-| Incorrect rounding                                   | `small_face_1k`, `big_face_1mm`            |
-| Confusing quoted clean price with yield-based pricing| `basic_99_16` and all (quote is used directly) |
-
-The `zero_accrued` case (where `days_since_coupon == 0`) is the one case where
-clean == dirty; it guards against an attempt that *only* ever works when accrued
-is zero.
-
-## Workflow for the screening exercise
-
-1. Send each prompt in `prompts/baseline_prompts.md` to the model; save the
-   returned code to `attempts/baseline_NN/attempt.py`.
-2. Do the same for `prompts/improved_prompts.md` into `attempts/improved_NN/`.
-3. Score every attempt with `evaluate_attempt.py`.
-4. Record one row per run in `metadata/runs.csv` and summarize the scoreboards in
-   `results/baseline_results.md` and `results/improved_results.md`.
-
-> Note: this repo intentionally ships **no attempt solutions** — neither correct
-> nor deliberately wrong. The oracle is the ground truth; the evaluator is fair
-> and simply catches realistic mistakes. Generate the attempts from the prompts.
+The improved prompts fixed the failures by explicitly specifying Treasury quote notation, clean-vs-dirty price, semiannual coupon accrual, and final cent rounding.
