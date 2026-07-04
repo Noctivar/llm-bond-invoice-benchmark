@@ -4,6 +4,12 @@ This project evaluates whether an AI coding agent can correctly implement a smal
 
 The assignment goal is to compare vague baseline prompts against improved prompts. The baseline prompts produce plausible but incorrect finance code. The improved prompts explicitly specify the missing fixed-income conventions and produce correct results.
 
+This repository is a small **LLM finance benchmark research artifact**. For the
+clean, self-contained write-up of the headline result (baseline_01 → improved_01,
+11/16 → 16/16), see **[`case_01_treasury_bond_invoice/`](case_01_treasury_bond_invoice/README.md)**.
+The `archive_v1/` folder preserves an excluded orphan run for transparency; see
+[`archive_v1/NOTES.md`](archive_v1/NOTES.md).
+
 ## Problem
 
 Given:
@@ -43,14 +49,24 @@ Examples:
 
 ## Why LLMs fail
 
-Vague prompts often cause realistic finance-code mistakes:
+The 16 cases in `cases.json` are *designed* to catch a range of realistic
+fixed-income mistakes (naive decimal parsing of `99-16`, dropping the `+`,
+missing eighths-of-a-32nd notation, returning the clean value instead of the
+dirty/invoice amount, using the annual instead of the semiannual coupon, or
+rounding too early).
 
-* treating `99-16` as a decimal-like string
-* handling `99-16+` but failing eighths-of-a-32nd notation
-* returning the clean value instead of the dirty/invoice amount
-* forgetting accrued interest
-* using the annual coupon instead of the semiannual coupon
-* rounding too early
+In the runs actually recorded here, the **observed** baseline failures were
+narrower than that full list:
+
+* baseline_01–baseline_04 correctly handled ordinary quote formats, the
+  clean-vs-dirty split, and the semiannual coupon, but **failed the extended
+  eighths-of-a-32nd notation** (e.g. `99-162`, `98-317`, `101-035`), scoring
+  11/16.
+* baseline_05 had a **degenerate parse failure** (`float(quote)` raising
+  `ValueError` on every Treasury quote), scoring 0/16.
+
+The other mistakes in the list above are pitfalls the cases guard against, not
+failures these particular attempts exhibited.
 
 ## Results
 
@@ -74,6 +90,11 @@ Vague prompts often cause realistic finance-code mistakes:
 ├── oracle.py
 ├── cases.json
 ├── evaluate_attempt.py
+├── case_01_treasury_bond_invoice/   # clean case-study write-up
+│   ├── README.md
+│   ├── baseline.md
+│   ├── improved.md
+│   └── metadata.md
 ├── attempts/
 │   ├── baseline_01/
 │   ├── baseline_02/
@@ -94,6 +115,9 @@ Vague prompts often cause realistic finance-code mistakes:
 │   └── *_eval.txt
 ├── metadata/
 │   └── runs.csv
+├── archive_v1/                       # excluded orphan run, kept for transparency
+│   ├── NOTES.md
+│   └── baseline_05_unexpected_pass/
 └── tests/
     └── test_oracle.py
 ```
