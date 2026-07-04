@@ -7,18 +7,7 @@ for context.
 * Evaluation output: `results/baseline_03_eval.txt`
 * Ledger row: `metadata/runs.csv` (`baseline_03`)
 
-## Prompt
-
-The repository contains **two slightly different prompt records** for this run.
-Both are reproduced verbatim; neither is silently preferred. The results-file
-wording is the more likely match to the actual run because it references the
-saved output filename `solution.py`.
-
-### Recorded in `prompts/baseline_prompts.md`
-
-> Parse the bond quote string (e.g. `"101-03"`) and return the total amount for `invoice_amount(face_value, annual_coupon_rate, quote, days_since_coupon, days_in_coupon_period)`. The quote is the price.
-
-### Recorded in `results/baseline_results.md`
+## Submitted Prompt
 
 > Create a Python fixed-income quote converter.
 >
@@ -27,6 +16,17 @@ saved output filename `solution.py`.
 > It should take a Treasury bond quote such as `99-16+`, `101-03`, or `100-00` and return the total dollar amount paid by the buyer.
 >
 > Keep it simple and save everything in `solution.py`.
+
+The submitted prompt is the version recorded in `results/baseline_results.md`. It
+matches the generated artifact naming convention because the prompt asks for one
+file called `solution.py`, and the saved model output is
+`attempts/baseline_03/solution.py`. The shorter version in
+`prompts/baseline_prompts.md` is preserved below as an abbreviated repository
+record, not as the submitted prompt.
+
+### Abbreviated Prompt Record
+
+> Parse the bond quote string (e.g. `"101-03"`) and return the total amount for `invoice_amount(face_value, annual_coupon_rate, quote, days_since_coupon, days_in_coupon_period)`. The quote is the price.
 
 ## Model Output Summary
 

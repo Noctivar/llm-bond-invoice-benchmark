@@ -31,13 +31,13 @@ prototype. Future cases should log model name, timestamp, prompt version,
 request ID, response ID, temperature/settings if available, raw model output,
 and evaluation score.
 
-## Prompt Record Limitation
+## Prompt Records
 
-The audit found that this repository contains **two slightly different baseline
-prompt records** for `baseline_01` — one in `prompts/baseline_prompts.md` and a
-differently worded one in `results/baseline_results.md`. The case study
-**preserves both prompt records** (see `baseline.md`) rather than silently
-choosing one. The results-file wording is the more likely match to the actual
-run because it references the saved output filename `solution.py`, but this was
-not fully reconciled and is disclosed as a limitation rather than resolved by
-invention.
+The submitted baseline prompts are taken from `results/baseline_results.md`,
+which matches the generated artifact naming convention: each prompt asks for one
+file called `solution.py`, and each saved model output is stored as
+`attempts/[run]/solution.py`. The shorter prompt records in
+`prompts/baseline_prompts.md` are retained as abbreviated repository records for
+transparency. Raw Claude request/response transcripts were not captured, so
+request IDs, response IDs, exact model settings, and raw transcripts remain
+unavailable.

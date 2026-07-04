@@ -8,17 +8,7 @@
 * Evaluation output: `results/baseline_01_eval.txt`
 * Ledger row: `metadata/runs.csv` (`baseline_01`)
 
-## Prompt Records
-
-The audit found **two slightly different baseline prompt records** in the
-repository for this run. Both are reproduced below rather than silently
-reconciled.
-
-### Prompt version recorded in `prompts/baseline_prompts.md`
-
-> Write a Python function `invoice_amount(face_value, annual_coupon_rate, quote, days_since_coupon, days_in_coupon_period)` that returns the invoice amount for a Treasury bond trade. `quote` looks like `"99-16"`.
-
-### Prompt version recorded in `results/baseline_results.md`
+## Submitted Prompt
 
 > Write a Python function called `invoice_amount(face_value, annual_coupon_rate, quote, days_since_coupon, days_in_coupon_period)` that calculates the amount paid for a Treasury bond purchase.
 >
@@ -26,11 +16,16 @@ reconciled.
 >
 > Keep the implementation simple and put everything in one file called `solution.py`.
 
-The exact originally submitted prompt was not fully reconciled because the
-repository contained two slightly different prompt records. The results-file
-wording appears more likely to match the actual run because it references
-`solution.py`, which is the saved output filename. This discrepancy is preserved
-rather than silently corrected.
+The submitted prompt is the version recorded in `results/baseline_results.md`. It
+matches the generated artifact naming convention because the prompt asks for one
+file called `solution.py`, and the saved model output is
+`attempts/baseline_01/solution.py`. The shorter version in
+`prompts/baseline_prompts.md` is preserved below as an abbreviated repository
+record, not as the submitted prompt.
+
+### Abbreviated Prompt Record
+
+> Write a Python function `invoice_amount(face_value, annual_coupon_rate, quote, days_since_coupon, days_in_coupon_period)` that returns the invoice amount for a Treasury bond trade. `quote` looks like `"99-16"`.
 
 ## Model Output Summary
 

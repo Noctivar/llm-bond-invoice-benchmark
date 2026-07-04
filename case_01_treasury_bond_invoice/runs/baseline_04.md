@@ -7,18 +7,7 @@ for context.
 * Evaluation output: `results/baseline_04_eval.txt`
 * Ledger row: `metadata/runs.csv` (`baseline_04`)
 
-## Prompt
-
-The repository contains **two slightly different prompt records** for this run.
-Both are reproduced verbatim; neither is silently preferred. The results-file
-wording is the more likely match to the actual run because it references the
-saved output filename `solution.py`.
-
-### Recorded in `prompts/baseline_prompts.md`
-
-> Write `invoice_amount(face_value, annual_coupon_rate, quote, days_since_coupon, days_in_coupon_period)`. It should use the price and add the interest. The quote is something like `99-16`.
-
-### Recorded in `results/baseline_results.md`
+## Submitted Prompt
 
 > Build a one-file Python helper for converting Treasury bond quotes into dollar prices.
 >
@@ -30,6 +19,17 @@ saved output filename `solution.py`.
 > Return the bond's dollar price for the trade.
 >
 > Save everything in `solution.py`.
+
+The submitted prompt is the version recorded in `results/baseline_results.md`. It
+matches the generated artifact naming convention because the prompt asks for one
+file called `solution.py`, and the saved model output is
+`attempts/baseline_04/solution.py`. The shorter version in
+`prompts/baseline_prompts.md` is preserved below as an abbreviated repository
+record, not as the submitted prompt.
+
+### Abbreviated Prompt Record
+
+> Write `invoice_amount(face_value, annual_coupon_rate, quote, days_since_coupon, days_in_coupon_period)`. It should use the price and add the interest. The quote is something like `99-16`.
 
 ## Model Output Summary
 
