@@ -7,18 +7,7 @@ for context. This is the most severe baseline failure in the canonical set.
 * Evaluation output: `results/baseline_05_eval.txt`
 * Ledger row: `metadata/runs.csv` (`baseline_05`)
 
-## Prompt
-
-The repository contains **two slightly different prompt records** for this run.
-Both are reproduced verbatim; neither is silently preferred. The results-file
-wording is the more likely match to the actual run because it references the
-saved output filename `solution.py`.
-
-### Recorded in `prompts/baseline_prompts.md`
-
-> Given a coupon rate and a quoted price like `99-16+`, value the bond and return the cash amount from `invoice_amount(face_value, annual_coupon_rate, quote, days_since_coupon, days_in_coupon_period)`.
-
-### Recorded in `results/baseline_results.md`
+## Submitted Prompt
 
 > Write a simple Python function:
 >
@@ -29,6 +18,17 @@ saved output filename `solution.py`.
 > The quote is provided as a string.
 >
 > Save the implementation in one file called `solution.py`.
+
+The submitted prompt is the version recorded in `results/baseline_results.md`. It
+matches the generated artifact naming convention because the prompt asks for one
+file called `solution.py`, and the saved model output is
+`attempts/baseline_05/solution.py`. The shorter version in
+`prompts/baseline_prompts.md` is preserved below as an abbreviated repository
+record, not as the submitted prompt.
+
+### Abbreviated Prompt Record
+
+> Given a coupon rate and a quoted price like `99-16+`, value the bond and return the cash amount from `invoice_amount(face_value, annual_coupon_rate, quote, days_since_coupon, days_in_coupon_period)`.
 
 ## Model Output Summary
 
