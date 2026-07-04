@@ -7,8 +7,11 @@ The assignment goal is to compare vague baseline prompts against improved prompt
 This repository is a small **LLM finance benchmark research artifact**. For the
 clean, self-contained write-up of the headline result (baseline_01 → improved_01,
 11/16 → 16/16), see **[`case_01_treasury_bond_invoice/`](case_01_treasury_bond_invoice/README.md)**.
-The `archive_v1/` folder preserves an excluded orphan run for transparency; see
-[`archive_v1/NOTES.md`](archive_v1/NOTES.md).
+That case study also includes an
+[appendix of prompt variants](case_01_treasury_bond_invoice/prompt_variants.md)
+documenting the remaining canonical runs (baseline_02–05, improved_02–05) for the
+same Treasury bond invoice task. The `archive_v1/` folder preserves an excluded
+orphan run for transparency; see [`archive_v1/NOTES.md`](archive_v1/NOTES.md).
 
 ## Problem
 

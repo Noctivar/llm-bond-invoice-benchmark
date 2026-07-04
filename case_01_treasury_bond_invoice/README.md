@@ -66,3 +66,7 @@ pytest
 * [improved.md](improved.md) — the improved run: the convention-aware prompt,
   produced code, and what changed.
 * [metadata.md](metadata.md) — what run metadata was and was not captured.
+* [prompt_variants.md](prompt_variants.md) — **appendix**: the remaining
+  canonical runs (baseline_02–05, improved_02–05) for this same task, with a
+  summary table and per-run detail in [`runs/`](runs/). This headline write-up
+  stays focused on baseline_01 → improved_01; the appendix covers the variants.
