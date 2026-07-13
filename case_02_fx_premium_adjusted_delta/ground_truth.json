@@ -1,0 +1,39 @@
+{
+  "q_id": "option_002",
+  "case_family": "fx_premium_adjusted_spot_delta",
+  "parameters": {
+    "spot": 1.1,
+    "domestic_rate": 0.04,
+    "foreign_rate": 0.02,
+    "maturity": 0.5,
+    "volatility": 0.12,
+    "target_delta": 0.25,
+    "premium_currency": "foreign",
+    "delta_convention": "premium-adjusted spot delta"
+  },
+  "ground_truth": {
+    "forward": 1.1110551837925848,
+    "all_strikes": [
+      0.28055536850735785,
+      1.1758927214691122
+    ],
+    "deltas_at_strikes": [
+      0.25,
+      0.25
+    ],
+    "selected_market_strike": 1.1758927214691122,
+    "maximum_delta": 0.8163610204858845,
+    "strike_at_maximum": 0.95178420068351
+  },
+  "observed_baseline": {
+    "reported_low_root": 0.2777638,
+    "reported_high_root": 1.1767128,
+    "selected_market_strike": 1.1767128,
+    "formula_reported": "exp(-foreign_rate*T) * (K/spot) * N(d2)",
+    "failure": "The baseline combined the foreign discount factor with K/spot. Premium-adjusted spot delta requires exp(-domestic_rate*T)*K/spot, or equivalently exp(-foreign_rate*T)*K/forward."
+  },
+  "failure_labels": [
+    "wrong_discount_factor_in_premium_adjusted_spot_delta",
+    "mixes_spot_and_forward_delta_normalizations"
+  ]
+}

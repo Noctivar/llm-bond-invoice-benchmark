@@ -1,0 +1,20 @@
+Automated numerical evaluation
+----------------------------------------------------------
+PASS  forward
+PASS  two positive roots
+PASS  lower root
+PASS  upper root
+PASS  selected OTM root
+PASS  source indicates correct domestic discounting
+----------------------------------------------------------
+Automated score: 10/10
+
+Actual forward: 1.111055183793
+Actual strikes: [0.28055536850735785, 1.1758927214691122]
+Actual selected strike: 1.175892721469
+
+Reference forward: 1.111055183793
+Reference strikes: [0.28055536850735885, 1.1758927214691124]
+Reference selected strike: 1.175892721469
+
+Complete the explanation points manually using rubric.json.

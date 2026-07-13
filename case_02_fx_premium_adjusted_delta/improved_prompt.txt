@@ -1,0 +1,77 @@
+Create one Python file called solution.py.
+
+Implement:
+
+find_premium_adjusted_call_strikes(
+    spot,
+    domestic_rate,
+    foreign_rate,
+    maturity,
+    volatility,
+    target_delta
+)
+
+Use the Garman-Kohlhagen model.
+
+The option premium is paid in foreign currency and the market delta convention
+is premium-adjusted spot delta.
+
+Define:
+
+forward = spot * exp((domestic_rate - foreign_rate) * maturity)
+
+d1 = (
+    log(forward / strike)
+    + 0.5 * volatility**2 * maturity
+) / (volatility * sqrt(maturity))
+
+d2 = d1 - volatility * sqrt(maturity)
+
+For a call, the premium-adjusted spot delta is:
+
+delta_spot_pa
+= exp(-domestic_rate * maturity)
+  * (strike / spot)
+  * N(d2)
+
+This is equivalent to:
+
+delta_spot_pa
+= exp(-foreign_rate * maturity)
+  * (strike / forward)
+  * N(d2)
+
+Do not use:
+
+exp(-foreign_rate * maturity) * (strike / spot) * N(d2)
+
+because that mixes the spot and forward normalizations.
+
+Use:
+
+spot = 1.10
+domestic_rate = 0.04
+foreign_rate = 0.02
+maturity = 0.50
+volatility = 0.12
+target_delta = 0.25
+
+Find every positive strike satisfying the target delta. The call-delta function
+is non-monotonic, so search both sides of its maximum.
+
+Return a dictionary containing:
+
+forward
+all_strikes
+deltas_at_strikes
+selected_market_strike
+maximum_delta
+strike_at_maximum
+explanation
+
+Select the out-of-the-money call root above the forward as the quoted
+25-delta call strike.
+
+Use Python's standard library only.
+Do not use precomputed answers.
+Keep the implementation simple.

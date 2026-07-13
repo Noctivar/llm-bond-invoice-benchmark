@@ -1,0 +1,21 @@
+Automated numerical evaluation
+----------------------------------------------------------
+PASS  forward
+PASS  two positive roots
+FAIL  lower root
+FAIL  upper root
+FAIL  selected OTM root
+FAIL  source formula requires manual review
+      detected likely exp(-foreign_rate*T) with K/spot
+----------------------------------------------------------
+Automated score: 3/10
+
+Actual forward: 1.111055183793
+Actual strikes: [0.277763795948, 1.176712833834]
+Actual selected strike: 1.176712833834
+
+Reference forward: 1.111055183793
+Reference strikes: [0.28055536850735885, 1.1758927214691124]
+Reference selected strike: 1.175892721469
+
+Complete the explanation points manually using rubric.json.

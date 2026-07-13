@@ -1,0 +1,41 @@
+{
+  "q_id": "option_002",
+  "total_points": 10,
+  "components": [
+    {
+      "points": 1,
+      "criterion": "Computes the forward as spot*exp((rd-rf)*T)."
+    },
+    {
+      "points": 2,
+      "criterion": "Uses premium-adjusted spot call delta exp(-rd*T)*(K/S)*N(d2), or the equivalent exp(-rf*T)*(K/F)*N(d2)."
+    },
+    {
+      "points": 2,
+      "criterion": "Recognizes non-monotonicity and searches for both positive roots."
+    },
+    {
+      "points": 2,
+      "criterion": "Returns roots near 0.2805553685 and 1.1758927215."
+    },
+    {
+      "points": 1,
+      "criterion": "Checks that the delta at both roots is approximately 0.25."
+    },
+    {
+      "points": 1,
+      "criterion": "Selects the upper root as the market-standard OTM call strike."
+    },
+    {
+      "points": 1,
+      "criterion": "Explains why the lower deeply ITM root is not the quoted 25-delta call strike."
+    }
+  ],
+  "classification": {
+    "full_success": "9-10",
+    "partial_success": "5-8",
+    "failure": "0-4"
+  },
+  "critical_failure_override": "An answer using exp(-rf*T)*(K/S)*N(d2) cannot receive Full Success because it mixes the spot and forward normalizations.",
+  "observed_baseline_score": 6
+}

@@ -1,0 +1,45 @@
+Create one Python file called solution.py.
+
+Implement:
+
+find_premium_adjusted_call_strikes(
+    spot,
+    domestic_rate,
+    foreign_rate,
+    maturity,
+    volatility,
+    target_delta
+)
+
+Use the Garman-Kohlhagen model.
+
+The option premium is paid in the foreign currency, and the market delta
+convention is premium-adjusted spot delta.
+
+Use:
+
+spot = 1.10
+domestic_rate = 0.04
+foreign_rate = 0.02
+maturity = 0.50
+volatility = 0.12
+target_delta = 0.25
+
+Find every positive strike that satisfies the target premium-adjusted call
+delta.
+
+Then identify which strike is the market-standard out-of-the-money 25-delta
+call strike.
+
+Return and print:
+
+- the FX forward
+- every positive mathematical strike solution
+- the premium-adjusted delta at each solution
+- the selected market-standard strike
+- an explanation of why the other solution is not used as the quoted
+  25-delta call strike
+
+Use Python's standard library only.
+Do not use precomputed answers.
+Keep the implementation simple.
